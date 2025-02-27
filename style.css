@@ -5,127 +5,158 @@ body {
     font-family: 'Arial', sans-serif; /* Clean, professional font */
     padding: 0 20px; /* Adds space on the sides */
     color: #333; /* Dark gray text color for better readability */
-  }
-  
-  /* Header Styling */
-  header {
+}
+
+/* Header Styling */
+header {
     background-color: #222; /* Darker background for header */
     color: #fff; /* White text for contrast */
     padding: 15px 0;
-  }
-  
-  nav ul {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+}
+
+nav ul {
     list-style: none;
     display: flex;
     justify-content: center; /* Centers nav items */
     margin: 0;
     padding: 0;
-  }
-  
-  nav li {
+}
+
+nav li {
     margin: 0 20px;
-  }
-  
-  nav a {
+}
+
+nav a {
     text-decoration: none;
     color: #fff; /* White text for links */
     font-weight: bold;
     transition: color 0.3s ease; /* Smooth hover transition */
-  }
-  
-  nav a:hover {
+}
+
+nav a:hover {
     color: #f1c40f; /* Gold color on hover */
-  }
-  
-  /* Container for content */
-  .container {
+}
+
+/* Container for content */
+.container {
     width: 80%; /* Keeps content within a readable width */
     max-width: 1200px;
     margin: 0 auto; /* Centers content */
     padding: 20px;
-  }
-  
-  /* Header Section */
-  .headers h2, .headers h3 {
+}
+
+/* Header Section */
+.headers h2, .headers h3 {
     font-size: 2em; /* Larger heading text */
     margin-bottom: 10px;
     color: #333; /* Dark color for headings */
-  }
-  
-  /* Styling for Default Sections (Content + Images) */
-  .default {
+    border-bottom: 2px solid #f1c40f; /* Underline effect */
+    padding-bottom: 10px;
+}
+
+/* Styling for Default Sections (Content + Images) */
+.default {
     display: flex;
-    
     justify-content: space-between; /* Ensures space between text and image */
     align-items: center; /* Centers content vertically */
     margin-bottom: 20px;
     padding: 20px;
-  }
-  
-  .default img {
+    background-color: #fff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.default img {
     max-width: 400px; /* Restricts image size */
     height: auto;
     margin-left: 20px; /* Adds space between text and image */
-  }
-  
-  /* Projects Section */
-  .projects {
+}
+
+/* Projects Section */
+.projects {
     font-size: 1em;
     line-height: 1.6;
     margin-top: 40px;
     text-align: left;
-  }
-  
-  .projects h3 {
+}
+
+.projects h3 {
     font-size: 1.5em; /* Larger subheading for projects */
-  }
-  
-  .projects p {
+    color: #222; /* Dark color for project headings */
+}
+
+.projects p {
     font-size: 1em;
     line-height: 1.6;
     color: #555; /* Slightly lighter text for readability */
-  }
-  
-  /* Footer Styling */
-  footer {
+}
+
+/* Footer Styling */
+footer {
     background-color: #222; /* Dark footer background */
     color: #fff; /* White footer text */
     padding: 20px 0;
     text-align: center; /* Centers footer text */
     width: 100%;
-  }
-  
-  footer p {
+    position: relative;
+    bottom: 0;
+}
+
+/* Footer Text */
+footer p {
     font-size: 1em;
     margin: 0;
-  }
-  
-  /* Images (Right-Aligned) */
-  .images {
+}
+
+/* Images (Right-Aligned) */
+.images {
     display: flex;
     justify-content: flex-end; /* Aligns images to the right */
     align-items: center;
     margin-top: 20px;
-  }
-  
-  .images img {
+}
+
+.images img {
     max-width: 100%;
     height: auto;
     margin-left: 20px;
-  }
-  .default-text{
+}
+
+.default-text {
     display: flex;
-    
     justify-content: space-between; /* Ensures space between text and image */
     align-items: center; /* Centers content vertically */
     margin-bottom: 20px;
     padding: 20px;
     width: 40%;
-  }
+}
 
-  .project-img {
+.project-img {
     float: right;
     margin-left: 20px; /* Add some space between the image and the text */
     width: 400px;
     height: 600px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .default {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .default img {
+        margin-left: 0; /* Remove left margin */
+        margin-top: 10px; /* Add top margin for spacing */
+    }
+
+    .default-text {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .project-img {
+        width: 100%; /* Full width for project image */
+        height: auto; /* Maintain aspect ratio */
+    }
 }
