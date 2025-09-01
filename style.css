@@ -1,280 +1,209 @@
-/* General Body Styling */
-body {
-    background: linear-gradient(135deg, #2c2c2c 30%, #1f1f1f 70%);
+/* CYBERPUNK MINIMAL NEON THEME */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Orbitron:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 0 20px;
-    color: #fff;
-    scroll-behavior: smooth;
+    padding: 0;
 }
 
-/* Header Styling */
+body {
+    background: linear-gradient(135deg, #0a0a0f 0%, #141426 100%);
+    font-family: 'DM Sans', sans-serif;
+    color: #aefcff;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    padding: 0 16px;
+}
+
+/* HEADER + NAV */
 header {
-    background-color: rgba(34, 34, 34, 0.9);
-    color: #fff;
-    padding: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid #00ffff33;
+    border-radius: 12px;
+    margin: 16px auto;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
     position: sticky;
-    top: 0;
+    top: 10px;
     z-index: 1000;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    margin: 0 20px;
-    position: relative;
+    gap: 24px;
+    flex-wrap: wrap;
 }
 
 nav a {
+    font-family: 'Orbitron', sans-serif;
+    color: #aefcff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
     text-decoration: none;
-    color: #f1c40f;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    display: block;
 }
 
 nav a:hover {
-    background-color: #8e4c4c;
-    color: #fff;
+    color: #ff66ff;
+    background: rgba(255, 0, 255, 0.1);
 }
 
-/* Dropdown Styling */
+/* DROPDOWN FIX */
 .dropdown {
     position: relative;
-    display: inline-block;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2c2c2c;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
-    z-index: 1001;
-    border-radius: 5px;
-    border: 1px solid #8e4c4c;
-    top: 100%;
+    top: 120%;
     left: 0;
+    background: rgba(15, 15, 30, 0.95);
+    border: 1px solid #00ffff55;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0,255,255,0.2);
+    flex-direction: column;
+    z-index: 999;
 }
 
 .dropdown-content a {
-    color: #f1c40f;
-    padding: 12px 16px;
-    text-decoration: none;
     display: block;
-    border-radius: 0;
-    font-size: 0.9em;
+    padding: 10px 14px;
+    color: #aefcff;
+    transition: background 0.2s ease;
+    font-family: 'DM Sans', sans-serif;
 }
 
 .dropdown-content a:hover {
-    background-color: #8e4c4c;
+    background: rgba(0,255,255,0.1);
     color: #fff;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: flex;
 }
 
-.dropdown:hover > a {
-    background-color: #8e4c4c;
-    color: #fff;
-}
-
-/* Section Styling */
-section {
-    margin: 40px 0;
-    padding: 20px;
-}
-
+/* SECTION HEADERS */
 .headers h2 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    color: #c0392b;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2em;
+    color: #ff66ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-align: center;
 }
 
 .headers hr {
-    border: none;
     height: 2px;
-    background: linear-gradient(to right, #8e4c4c, transparent);
-    margin-bottom: 30px;
+    border: none;
+    background: linear-gradient(90deg, #ff66ff, #00ffff);
+    margin: 0 auto 20px auto;
+    width: 80px;
+    opacity: 0.7;
 }
 
-/* About Section */
-.default {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-    padding: 30px;
-    border: 2px solid #8e4c4c;
-    border-radius: 8px;
-    background-color: #3c3c3c;
-    transition: transform 0.3s;
-}
-
-.default:hover {
-    transform: scale(1.02);
-}
-
-.default p {
-    flex: 1;
-    margin-right: 30px;
-    line-height: 1.7;
-    font-size: 1.1em;
-}
-
-.default img {
-    max-width: 400px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Project Filter Buttons */
-.project-filters {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    gap: 15px;
-}
-
-.filter-btn {
-    padding: 10px 20px;
-    background-color: #3c3c3c;
-    color: #f1c40f;
-    border: 2px solid #8e4c4c;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
-}
-
-.filter-btn:hover, .filter-btn.active {
-    background-color: #8e4c4c;
-    color: #fff;
-}
-
-/* Project Cards */
-.project-grid {
-    display: grid;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.project-card {
-    background-color: #3c3c3c;
-    border: 2px solid #8e4c4c;
-    border-radius: 10px;
-    padding: 25px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    opacity: 1;
-    transform: scale(1);
+/* ABOUT + PROJECT CARDS */
+.default, .project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 20px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 900px;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.25);
 }
 
-.project-card.hidden {
-    opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
-    margin: 0;
-    padding: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.project-card h3 {
-    color: #c0392b;
-    font-size: 1.8em;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.category-tag {
-    background-color: #8e4c4c;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.7em;
-    font-weight: bold;
-}
-
-.project-media {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.project-media img, .project-media video {
+.project-media img, 
+.project-media video {
     max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: block;
+    margin: 12px auto;
 }
 
-.project-description {
-    line-height: 1.6;
-    font-size: 1.1em;
-    color: #ddd;
+/* CATEGORY TAG */
+.category-tag {
+    background: linear-gradient(45deg, #00ffff, #ff66ff);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-family: 'Orbitron', sans-serif;
 }
 
-/* Footer Styling */
-footer {
-    background-color: rgba(34, 34, 34, 0.9);
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
-    margin-top: 60px;
-}
-
-footer h2 {
-    color: #c0392b;
+/* FILTER BUTTONS */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
-footer p {
-    font-size: 1.1em;
-    line-height: 1.6;
+.filter-btn {
+    background: transparent;
+    border: 1px solid #00ffff66;
+    color: #aefcff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
 }
 
-/* Responsive Design */
+.filter-btn:hover, .filter-btn.active {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: #00ffff;
+    color: #fff;
+}
+
+/* FOOTER */
+footer {
+    background: rgba(20, 20, 40, 0.7);
+    border-top: 1px solid #00ffff44;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+footer h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4em;
+    color: #ff66ff;
+    margin-bottom: 6px;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .default {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .default p {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .project-filters {
-        flex-direction: column;
-        align-items: center;
-    }
-
     nav ul {
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
     }
-
-    nav li {
-        margin: 5px 0;
+    .headers h2 {
+        font-size: 1.8em;
+    }
+    .default, .project-card {
+        padding: 12px;
     }
 }
