@@ -1,154 +1,280 @@
 /* General Body Styling */
 body {
-    background: linear-gradient(135deg, #2c2c2c 30%, #1f1f1f 70%); /* Darker gradient background */
+    background: linear-gradient(135deg, #2c2c2c 30%, #1f1f1f 70%);
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-    padding: 0 20px; /* Adds space on the sides */
-    color: #fff; /* White text color for better readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0 20px;
+    color: #fff;
+    scroll-behavior: smooth;
 }
 
 /* Header Styling */
 header {
-    background-color: rgba(34, 34, 34, 0.9); /* Dark transparent background for header */
-    color: #fff; /* White text for contrast */
+    background-color: rgba(34, 34, 34, 0.9);
+    color: #fff;
     padding: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center; /* Centers nav items */
+    justify-content: center;
     margin: 0;
     padding: 0;
 }
 
 nav li {
     margin: 0 20px;
+    position: relative;
 }
 
 nav a {
     text-decoration: none;
-    color: #f1c40f; /* Gold text for links */
+    color: #f1c40f;
     font-weight: bold;
-    padding: 5px 10px; /* Padding for clickable area */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: block;
 }
 
 nav a:hover {
-    background-color: #8e4c4c; /* Burgundy background on hover */
-    color: #fff; /* White text on hover */
+    background-color: #8e4c4c;
+    color: #fff;
 }
 
-/* Container for content */
-.container {
-    width: 80%; /* Keeps content within a readable width */
-    max-width: 1200px;
-    margin: 0 auto; /* Centers content */
+/* Dropdown Styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2c;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1001;
+    border-radius: 5px;
+    border: 1px solid #8e4c4c;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content a {
+    color: #f1c40f;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 0;
+    font-size: 0.9em;
+}
+
+.dropdown-content a:hover {
+    background-color: #8e4c4c;
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover > a {
+    background-color: #8e4c4c;
+    color: #fff;
+}
+
+/* Section Styling */
+section {
+    margin: 40px 0;
     padding: 20px;
-    border: 2px solid #8e4c4c; /* Burgundy border */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
-    background-color: #2c2c2c; /* Dark background for content */
 }
 
-/* Header Section */
-.headers h2, .headers h3 {
-    font-size: 2.5em; /* Larger heading text */
+.headers h2 {
+    font-size: 2.5em;
     margin-bottom: 10px;
-    color: #c0392b; /* Dark red color for headings */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    color: #c0392b;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Styling for Default Sections (Content + Images) */
+.headers hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #8e4c4c, transparent);
+    margin-bottom: 30px;
+}
+
+/* About Section */
 .default {
     display: flex;
-    justify-content: space-between; /* Ensures space between text and image */
-    align-items: center; /* Centers content vertically */
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 30px;
-    padding: 20px;
-    border: 2px solid #8e4c4c; /* Burgundy dashed border for sections */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #3c3c3c; /* Darker background for sections */
-    transition: transform 0.3s; /* Animation effect */
+    padding: 30px;
+    border: 2px solid #8e4c4c;
+    border-radius: 8px;
+    background-color: #3c3c3c;
+    transition: transform 0.3s;
 }
 
 .default:hover {
-    transform: scale(1.02); /* Slight scale effect on hover */
+    transform: scale(1.02);
+}
+
+.default p {
+    flex: 1;
+    margin-right: 30px;
+    line-height: 1.7;
+    font-size: 1.1em;
 }
 
 .default img {
-    max-width: 300px; /* Restricts image size */
+    max-width: 400px;
     height: auto;
-    margin-left: 20px; /* Adds space between text and image */
-    border-radius: 10px; /* Rounded corners for images */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Projects Section */
-.projects {
-    font-size: 1.2em;
+/* Project Filter Buttons */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: #3c3c3c;
+    color: #f1c40f;
+    border: 2px solid #8e4c4c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: #8e4c4c;
+    color: #fff;
+}
+
+/* Project Cards */
+.project-grid {
+    display: grid;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background-color: #3c3c3c;
+    border: 2px solid #8e4c4c;
+    border-radius: 10px;
+    padding: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.project-card.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.project-card h3 {
+    color: #c0392b;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-tag {
+    background-color: #8e4c4c;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.project-media {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.project-media img, .project-media video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.project-description {
     line-height: 1.6;
-    margin-top: 40px;
-    text-align: left;
-}
-
-.projects h3 {
-    font-size: 1.8em; /* Larger subheading for projects */
-    color: #c0392b; /* Dark red color for project headings */
-}
-
-.projects p {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #ddd; /* Lighter gray text for readability */
+    font-size: 1.1em;
+    color: #ddd;
 }
 
 /* Footer Styling */
 footer {
-    background-color: rgba(34, 34, 34, 0.9); /* Dark transparent footer background */
-    color: #fff; /* White footer text */
-    padding: 20px 0;
-    text-align: center; /* Centers footer text */
-    width: 100%;
-    position: relative; /* Positioning for effects */
+    background-color: rgba(34, 34, 34, 0.9);
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 60px;
+}
+
+footer h2 {
+    color: #c0392b;
+    margin-bottom: 20px;
 }
 
 footer p {
-    font-size: 1em;
-    margin: 0;
+    font-size: 1.1em;
+    line-height: 1.6;
 }
 
-/* Images (Right-Aligned) */
-.images {
-    display: flex;
-    justify-content: flex-end; /* Aligns images to the right */
-    align-items: center;
-    margin-top: 20px;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .default {
+        flex-direction: column;
+        text-align: center;
+    }
 
-.images img {
-    max-width: 100%;
-    height: auto;
-    margin-left: 20px;
-}
+    .default p {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
 
-.default-text {
-    display: flex;
-    justify-content: space-between; /* Ensures space between text and image */
-    align-items: center; /* Centers content vertically */
-    margin-bottom: 20px;
-    padding: 20px;
-    width: 40%;
-    border: 2px solid #8e4c4c; /* Solid burgundy border for text sections */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #3c3c3c; /* Dark background for text sections */
-}
+    .project-filters {
+        flex-direction: column;
+        align-items: center;
+    }
 
-.project-img {
-    float: right;
-    margin-left: 20px; /* Add some space between the image and the text */
-    width: 400px;
-    height: 600px;
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin: 5px 0;
+    }
 }
