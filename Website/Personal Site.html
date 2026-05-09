@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Griffin Yocum</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans:  ['Geist',      'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+          mono:  ['Geist Mono', 'ui-monospace',  'SFMono-Regular', 'Menlo', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Geist -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  html, body { font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; background: #0a0a0a; }
+  body { background: #0a0a0a; color: #ededed; }
+</style>
+
+<!-- Babel for inline JSX -->
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- One single React via ESM, exposed as window.React/ReactDOM so Babel-transformed JSX can use it -->
+<script type="module">
+  import * as ReactNS from "https://esm.sh/react@18.3.1";
+  import * as ReactDOMNS from "https://esm.sh/react-dom@18.3.1";
+  import * as ReactDOMClientNS from "https://esm.sh/react-dom@18.3.1/client";
+  import * as ThreeNS from "https://esm.sh/three@0.179.1";
+  import { GLTFLoader } from "https://esm.sh/three@0.179.1/examples/jsm/loaders/GLTFLoader.js";
+  import * as Toolbar from "https://esm.sh/@radix-ui/react-toolbar@1.1.0?deps=react@18.3.1,react-dom@18.3.1";
+  import * as Tabs from "https://esm.sh/@radix-ui/react-tabs@1.1.1?deps=react@18.3.1,react-dom@18.3.1";
+  import * as Tooltip from "https://esm.sh/@radix-ui/react-tooltip@1.1.2?deps=react@18.3.1,react-dom@18.3.1";
+  import * as HoverCard from "https://esm.sh/@radix-ui/react-hover-card@1.1.2?deps=react@18.3.1,react-dom@18.3.1";
+
+  window.React = ReactNS.default || ReactNS;
+  window.ReactDOM = Object.assign({}, ReactDOMNS.default || ReactDOMNS, ReactDOMClientNS);
+  window.THREE = ThreeNS;
+  window.GLTFLoader = GLTFLoader;
+  window.RadixToolbar = Toolbar;
+  window.RadixTabs = Tabs;
+  window.RadixTooltip = Tooltip;
+  window.RadixHoverCard = HoverCard;
+  window.dispatchEvent(new Event("radix-ready"));
+</script>
+
+</head>
+<body class="antialiased bg-neutral-950 text-neutral-100">
+  <div id="root"></div>
+  <script>
+    function bootApp() {
+      const cacheKey = Date.now();
+      // Load all .jsx files, concatenate, hand to Babel as one inline script.
+      // This avoids any load-order races between separate Babel <script src> tags.
+      Promise.all([
+        fetch(`tweaks-panel.jsx?v=${cacheKey}`, { cache: "no-store" }).then(r => r.text()),
+        fetch(`sections.jsx?v=${cacheKey}`, { cache: "no-store" }).then(r => r.text()),
+        fetch(`app.jsx?v=${cacheKey}`, { cache: "no-store" }).then(r => r.text()),
+      ]).then(([tweaks, sections, app]) => {
+        const s = document.createElement("script");
+        s.type = "text/babel";
+        s.setAttribute("data-presets", "react");
+        s.textContent = tweaks + "\n;\n" + sections + "\n;\n" + app;
+        document.body.appendChild(s);
+        // Manually trigger Babel transform for the just-added inline script
+        if (window.Babel && window.Babel.transformScriptTags) {
+          window.Babel.transformScriptTags();
+        }
+      });
+    }
+    if (window.RadixToolbar && window.RadixTooltip) {
+      bootApp();
+    } else {
+      window.addEventListener("radix-ready", bootApp, { once: true });
+    }
+  </script>
+</body>
+</html>
