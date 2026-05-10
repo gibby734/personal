@@ -5,6 +5,7 @@ import * as Toolbar from '@radix-ui/react-toolbar'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import * as HoverCard from '@radix-ui/react-hover-card'
 import { ProjectsSection, ContactSection } from './sections.jsx'
+import { HabitatCanvas } from './habitat-canvas.jsx'
 import {
   useTweaks, TweaksPanel, TweakSection,
   TweakToggle, TweakRadio, TweakSlider,
@@ -461,7 +462,7 @@ function RetroMonitorScene({ dark }) {
 function PageBackground({ dark }) {
   return (
     <div aria-hidden className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-      <div className={dark ? "absolute inset-0 bg-black" : "absolute inset-0 bg-neutral-50"} />
+      <div className="absolute inset-0 bg-black" />
     </div>
   )
 }
@@ -639,7 +640,6 @@ function Hero({ dark, t }) {
 
   return (
     <section ref={sectionRef} className="relative flex flex-col overflow-hidden pt-28 pb-40 md:pb-72">
-      <CenterDivider t={t} dark={dark} scrollProgress={progress} />
 
       <img
         src="/images/einsteinbw.jpg"
@@ -759,7 +759,9 @@ export function App() {
   return (
     <div className="min-h-screen relative font-sans antialiased bg-transparent text-neutral-900 dark:text-neutral-100">
       <PageBackground dark={dark} />
+      <HabitatCanvas />
       <div className="relative z-10">
+        <CenterDivider t={t} dark={dark} scrollProgress={1} />
         <TopBar dark={dark} setDark={setDark} />
         <Hero dark={dark} t={t} />
         <ProjectsSection dark={dark} />

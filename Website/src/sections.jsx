@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import * as HoverCard from '@radix-ui/react-hover-card'
@@ -30,7 +30,6 @@ function SectionMark({ index, title }) {
 function DividedRow({ left, right, leftClassName = "", rightClassName = "" }) {
   return (
     <div className="relative w-full max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-12 gap-10 md:gap-24 items-center py-12">
-      <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-red-800/20 dark:bg-rose-300/15" aria-hidden />
       <div className={"col-span-12 md:col-span-6 md:pr-10 flex flex-col items-end text-right gap-3 " + leftClassName}>
         {left}
       </div>
@@ -326,11 +325,51 @@ function ProjectMedia({ media, side, title }) {
   )
 }
 
-function ProjectRow({ project, idx }) {
-  const mediaOnLeft = idx % 2 === 0
+// Symmetric scroll-driven content motion — mirrors stageY exactly.
+// Enters from below with easeOut5, brief hold, exits upward with easeIn5.
+function useStickyMotion(habitatIndex, ref) {
+  useEffect(() => {
+    const easeOut5 = t => 1 - Math.pow(1 - t, 2)
+    const easeIn5  = t => Math.pow(t, 2)
 
-  const meta = (
-    <>
+    const onScroll = () => {
+      if (!ref.current) return
+      const section = document.querySelector(`[data-habitat="${habitatIndex}"]`)
+      if (!section) return
+      const rect = section.getBoundingClientRect()
+      const vh   = window.innerHeight
+      const totalTravel = rect.height + vh * 0.6
+      const traveled    = vh * 0.8 - rect.top
+      const p = Math.max(0, Math.min(1, traveled / totalTravel))
+
+      let offset
+      if (habitatIndex === 0) {
+        if      (p < 0.58) offset = 0
+        else if (p < 0.78) offset = -easeIn5((p - 0.58) / 0.20) * 120
+        else               offset = -120
+      } else {
+        if      (p < 0.20) offset =  (1 - easeOut5(p / 0.20))   * 120
+        else if (p < 0.58) offset = 0
+        else if (p < 0.78) offset = -easeIn5((p - 0.58) / 0.20) * 120
+        else               offset = -120
+      }
+
+      ref.current.style.transform = offset !== 0 ? `translateY(${offset}vh)` : ''
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [habitatIndex, ref])
+}
+
+function ProjectRow({ project, idx }) {
+  const onRight = idx % 2 === 0
+  const contentRef = useRef(null)
+  useStickyMotion(idx, contentRef)
+
+  const content = (
+    <div ref={contentRef} className={`flex flex-col gap-4 w-full ${onRight ? 'items-start text-left' : 'items-end text-right'}`}>
       <SectionEyebrow>
         {String(idx + 1).padStart(2, "0")} * {project.tag.toUpperCase()}
       </SectionEyebrow>
@@ -353,13 +392,14 @@ function ProjectRow({ project, idx }) {
           </svg>
         </a>
       )}
-    </>
+      <ProjectMedia media={project.media} side={onRight ? 'right' : 'left'} title={project.title} />
+    </div>
   )
 
   return (
     <DividedRow
-      left={mediaOnLeft ? <ProjectMedia media={project.media} side="left" title={project.title} /> : meta}
-      right={mediaOnLeft ? meta : <ProjectMedia media={project.media} side="right" title={project.title} />}
+      left={onRight ? null : content}
+      right={onRight ? content : null}
     />
   )
 }
@@ -381,11 +421,19 @@ export function ProjectsSection() {
           }
         />
       </div>
-      <div className="flex flex-col gap-14 md:gap-20">
-        {CURRENT_PROJECTS.map((project, index) => (
-          <ProjectRow key={project.title} project={project} idx={index} />
-        ))}
-      </div>
+
+      {CURRENT_PROJECTS.map((project, index) => (
+        <div
+          key={project.title}
+          data-habitat={index}
+          className="relative"
+          style={{ minHeight: '200vh' }}
+        >
+          <div className="sticky top-[20vh] flex items-center" style={{ height: '60vh' }}>
+            <ProjectRow project={project} idx={index} />
+          </div>
+        </div>
+      ))}
     </section>
   )
 }
