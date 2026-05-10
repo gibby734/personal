@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 RectAreaLightUniformsLib.init()
 
@@ -115,55 +116,7 @@ function buildStage(g) {
 
 
 function buildTerhertzScene(g) {
-  const mat = new THREE.MeshStandardMaterial({ color: 0x0e0e0e, roughness: 0.8, metalness: 0.1 })
-
-  // ── Desk ─────────────────────────────────────────────────────────────────
-  const deskTop = new THREE.Mesh(new THREE.BoxGeometry(4, 0.12, 1.8), mat)
-  deskTop.position.set(1.5, 1.5, -5)
-  g.add(deskTop)
-
-  ;[[-0.7, -0.7], [-0.7, 0.7], [0.7, -0.7], [0.7, 0.7]].forEach(([lx, lz]) => {
-    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.5, 0.08), mat)
-    leg.position.set(1.5 + lx * 1.8, 0.75, -5 + lz * 0.8)
-    g.add(leg)
-  })
-
-  // Monitor
-  const screen = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.75, 0.06), mat)
-  screen.position.set(1.5, 2.4, -5.6)
-  g.add(screen)
-  const stand = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.3, 0.08), mat)
-  stand.position.set(1.5, 1.77, -5.5)
-  g.add(stand)
-  const base = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.3), mat)
-  base.position.set(1.5, 1.63, -5.5)
-  g.add(base)
-
-  // Keyboard
-  const kb = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.04, 0.32), mat)
-  kb.position.set(1.5, 1.57, -4.9)
-  g.add(kb)
-
-  // ── Figure ────────────────────────────────────────────────────────────────
-  const cap = (r, len, x, y, z, rx = 0, rz = 0) => {
-    const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 8, 16), mat)
-    m.position.set(x, y, z)
-    m.rotation.x = rx
-    m.rotation.z = rz
-    g.add(m)
-  }
-  const Z = -4
-  cap(0.22, 0.08, 0, 3.0, Z)           // head
-  cap(0.30, 0.70, 0, 2.1, Z)           // torso
-  cap(0.22, 0.20, 0, 1.55, Z)          // hips
-  cap(0.11, 0.42, -0.65, 2.35, Z, 0,  0.7)  // upper arm L
-  cap(0.11, 0.42,  0.65, 2.35, Z, 0, -0.7)  // upper arm R
-  cap(0.09, 0.38, -0.95, 1.75, Z, 0,  0.3)  // forearm L
-  cap(0.09, 0.38,  0.95, 1.75, Z, 0, -0.3)  // forearm R
-  cap(0.13, 0.50, -0.22, 1.0, Z)       // upper leg L
-  cap(0.13, 0.50,  0.22, 1.0, Z)       // upper leg R
-  cap(0.10, 0.44, -0.22, 0.18, Z)      // lower leg L
-  cap(0.10, 0.44,  0.22, 0.18, Z)      // lower leg R
+  // Empty for now
 }
 
 function buildGoalScene(g) {
